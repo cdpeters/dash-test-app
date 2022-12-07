@@ -11,6 +11,7 @@ from data.process_data import mean_jun_dec
 # Needed for the app to see this module as a page.
 register_page(__name__, navbar=True)
 
+# Create bar chart row.
 bar_chart = dbc.Row(
     dbc.Col(
         create_bar_chart(df=sample_data),
@@ -20,6 +21,7 @@ bar_chart = dbc.Row(
     justify="center",
 )
 
+# Create line chart row.
 avg_temp_fig, avg_prcp_fig = create_hawaii_line_charts(df=mean_jun_dec)
 hawaii_line_charts = dbc.Row(
     [
@@ -37,6 +39,7 @@ hawaii_line_charts = dbc.Row(
     justify="center",
 )
 
+# Create table row.
 table = dbc.Row(
     dbc.Col(
         # Place a table.

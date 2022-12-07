@@ -1,18 +1,20 @@
 """Load data resources."""
 
-from pathlib import Path
-
 import ibis
 import pandas as pd
 
+from utils.constants import DATA_DIR, GOOGLE_DRIVE_DIR
 
-def load_data(data_dir):
+
+def load_data(data_dir, google_drive_dir):
     """Load data resources into appropriate data structures.
 
     Parameters
     ----------
-    data_dir : str
-        Path to the project's data directory.
+    data_dir : Path
+        pathlib Path to the project's data directory.
+    google_drive_dir : Path
+        pathlib Path to the shared google drive collaboration directory
 
     Returns
     -------
@@ -23,7 +25,7 @@ def load_data(data_dir):
     # Load NBA playoff team data from 1996-97 to 2021-22.
     playoff_teams = pd.read_csv(data_dir / "playoff_teams_df.csv")
     # Load Hawaii weather measurements and station data.
-    measurement, station = load_hawaii_weather(path=data_dir / "hawaii.sqlite")
+    measurement, station = load_hawaii_weather(path=google_drive_dir / "hawaii.sqlite")
 
     return playoff_teams, measurement, station
 
@@ -44,22 +46,20 @@ def load_hawaii_weather(path):
     """
     # Connect to the db
     db = ibis.sqlite.connect(path)
-
     tables = db.list_tables()
     # measurement and station are ibis Table instances.
     measurement = db.table(name=tables[0])
     station = db.table(name=tables[1])
 
-    # Execute creates DataFrames from the Tables.
+    # `execute()` creates DataFrames from the Tables.
     return measurement.execute(), station.execute()
 
 
 # Load Data ----------------------------------------------------------------------------
-# Uses the file path (`__file__`) of this module to form the data directory path.
-# parents[2] removes 3 pieces (since index 2 is 3rd element) from the path: file name,
-# and two parent directories.
-data_dir = Path(__file__).parents[2] / "data"
-playoff_teams, measurement, station = load_data(data_dir=data_dir)
+playoff_teams, measurement, station = load_data(
+    data_dir=DATA_DIR,
+    google_drive_dir=GOOGLE_DRIVE_DIR,
+)
 
 # Sample data from plotly.
 sample_data = pd.DataFrame(

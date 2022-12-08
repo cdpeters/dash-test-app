@@ -6,7 +6,7 @@ repos:
   rev: 22.10.0
   hooks:
   - id: black-jupyter
-- repo: https://github.com/pycqa/isort
+- repo: https://github.com/PyCQA/isort
   rev: 5.10.1
   hooks:
   - id: isort
@@ -19,7 +19,7 @@ repos:
   - id: interrogate
     args: [--verbose, --ignore-init-module, --fail-under=100, src]
 # Linter
-- repo: https://github.com/pycqa/flake8
+- repo: https://github.com/PyCQA/flake8
   rev: 5.0.4
   hooks:
   - id: flake8
@@ -40,3 +40,5 @@ repos:
   rev: 1.2.2
   hooks:
   - id: poetry-check
+  - id: poetry-lock
+    args: [--no-update]

@@ -17,7 +17,7 @@ repos:
   rev: 1.5.0  # or master if you're bold
   hooks:
   - id: interrogate
-    args: [--verbose, --ignore-init-module, src]
+    args: [--verbose, --ignore-init-module, --fail-under=100, src]
 # Linter
 - repo: https://github.com/pycqa/flake8
   rev: 5.0.4

@@ -34,6 +34,8 @@ profile = "black"
 
 [tool.interrogate]
 ignore-init-module = true
+fail-under = 100
+verbose = 1
 
 [build-system]
 requires = ["poetry-core"]

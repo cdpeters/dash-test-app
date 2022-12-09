@@ -29,3 +29,12 @@ mean_dec = mean_dec.reset_index()
 mean_jun_dec = pd.concat(objs=[mean_jun, mean_dec], ignore_index=True)
 
 # mean_jun.join(other=mean_dec, how="right", lsuffix="_jun", rsuffix="_dec")
+
+# Sample data from plotly.
+sample_data = pd.DataFrame(
+    {
+        "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
+        "Amount": [4, 1, 2, 2, 4, 5],
+        "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"],
+    }
+)

@@ -5,8 +5,7 @@ from dash import html, register_page
 
 from components.figures import create_bar_chart, create_hawaii_line_charts
 from components.table import create_table
-from data.load_data import measurement, sample_data
-from data.process_data import mean_jun_dec
+from data.process_data import mean_jun_dec, sample_data
 
 # Needed for the app to see this module as a page.
 register_page(__name__, navbar=True)
@@ -43,7 +42,7 @@ hawaii_line_charts = dbc.Row(
 table = dbc.Row(
     dbc.Col(
         # Place a table.
-        create_table(df=measurement),
+        create_table(df=mean_jun_dec),
         width=10,
     ),
     justify="center",

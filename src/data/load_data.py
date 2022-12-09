@@ -1,12 +1,22 @@
 """Load data resources."""
 
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, TypeAlias
+
 import ibis
 import pandas as pd
+from ibis.expr.types.relations import Table
 
 from utils.constants import DATA_DIR, GOOGLE_DRIVE_DIR
 
+if TYPE_CHECKING:
+    from pathlib import Path
 
-def load_data(data_dir, google_drive_dir):
+DataFrames: TypeAlias = tuple[pd.DataFrame, ...]
+
+
+def load_data(data_dir: Path, google_drive_dir: Path) -> DataFrames:
     """Load data resources into appropriate data structures.
 
     Parameters
@@ -14,7 +24,7 @@ def load_data(data_dir, google_drive_dir):
     data_dir : Path
         pathlib Path to the project's data directory.
     google_drive_dir : Path
-        pathlib Path to the shared google drive collaboration directory
+        pathlib Path to a shared google drive collaboration directory.
 
     Returns
     -------
@@ -30,26 +40,26 @@ def load_data(data_dir, google_drive_dir):
     return playoff_teams, measurement, station
 
 
-def load_hawaii_weather(path):
+def load_hawaii_weather(path: Path) -> DataFrames:
     """Read sqlite db of Hawaii weather data.
 
     Parameters
     ----------
-    path : str
-        Path to sqlite db.
+    path : Path
+        pathlib Path to sqlite db.
 
     Returns
     -------
     tuple
         Contains DataFrames of measurement and station data.
-
     """
     # Connect to the db
     db = ibis.sqlite.connect(path)
     tables = db.list_tables()
     # measurement and station are ibis Table instances.
-    measurement = db.table(name=tables[0])
-    station = db.table(name=tables[1])
+    measurement: Table = db.table(name=tables[0])
+    # print("from load_data.py, load_hawaii_weather function:", type(measurement))
+    station: Table = db.table(name=tables[1])
 
     # `execute()` creates DataFrames from the Tables.
     return measurement.execute(), station.execute()
@@ -59,13 +69,4 @@ def load_hawaii_weather(path):
 playoff_teams, measurement, station = load_data(
     data_dir=DATA_DIR,
     google_drive_dir=GOOGLE_DRIVE_DIR,
-)
-
-# Sample data from plotly.
-sample_data = pd.DataFrame(
-    {
-        "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
-        "Amount": [4, 1, 2, 2, 4, 5],
-        "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"],
-    }
 )

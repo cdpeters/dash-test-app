@@ -1,6 +1,7 @@
 examples/
 secrets.toml
-notebooks/read_secrets_toml.ipynb
+.vscode/
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

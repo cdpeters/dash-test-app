@@ -15,7 +15,7 @@ echo -e "${Cyan}Running ${BCyan}isort${Cyan} import formatter:${Color_Off}"
 isort .
 
 echo
-echo -e "${Cyan}Running ${BCyan}flake8${Cyan} code linter:${Color_Off}"
+echo -e "${Cyan}Running ${BCyan}interrogate${Cyan} check docstrings exist:${Color_Off}"
 
 interrogate .
 

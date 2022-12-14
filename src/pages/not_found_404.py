@@ -1,4 +1,8 @@
-"""Layout when user navigates to a route that doesn't exist."""
+"""Layout when user navigates to a route that doesn't exist.
+
+Variables:
+    layout
+"""
 
 import dash
 from dash import html

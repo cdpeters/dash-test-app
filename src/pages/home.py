@@ -1,4 +1,8 @@
-"""Layout for the home page."""
+"""Layout for the home page.
+
+Variables:
+    layout
+"""
 
 import dash_bootstrap_components as dbc
 from dash import html, register_page
@@ -15,5 +19,5 @@ layout = dbc.Container(
         ),
     ],
     fluid=True,
-    className="dbc mt-5 pt-4",
+    className="mt-5 pt-4",
 )

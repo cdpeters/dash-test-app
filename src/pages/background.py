@@ -1,9 +1,15 @@
-"""Layout for the background page."""
+"""Layout for the background page.
+
+Displays an example project background using markdown.
+
+Variables:
+    markdown
+    layout
+"""
 
 import dash_bootstrap_components as dbc
 from dash import dcc, html, register_page
 
-# Needed for the app to see this module as a page.
 register_page(__name__, navbar=True)
 
 markdown = dcc.Markdown(
@@ -41,6 +47,6 @@ layout = dbc.Container(
         markdown,
         html.Br(),
     ],
-    class_name="dbc px-3",
+    class_name="px-3",
     fluid=True,
 )

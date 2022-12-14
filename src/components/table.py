@@ -1,30 +1,54 @@
-"""Creates Dash DataTables for any page of the app."""
+"""Creates Dash DataTable from a DataFrame.
 
-from dash import dash_table
+Variables:
+    hawaii_climate_table
+"""
 
-from utils.constants import TABLE
+from dash.dash_table import DataTable
+from dash.dash_table.Format import Format, Scheme
 
+from data.process_data import transformed_measurement
+from utils.constants import TABLE_CLIMATE
 
-def create_table(df):
-    """Return a Div containing a DataTable built from the columns of a DataFrame.
-
-    Parameters
-    ----------
-    df : DataFrame
-        Dataset containing data for the table.
-
-    Returns
-    -------
-    Div
-        An instance of html.Div containing an instance of DataTable.
-
-    """
-    return dash_table.DataTable(
-        # `orient` sets the format of the output of `to_dict()`.
-        # `"records"` makes that output a list of dictionaries.
-        id=TABLE,
-        data=df.to_dict(orient="records"),
-        columns=[{"name": col, "id": col} for col in df.columns],
-        style_as_list_view=True,
-        style_header={"fontWeight": "bold"},
-    )
+hawaii_climate_table = DataTable(
+    id=TABLE_CLIMATE,
+    data=transformed_measurement.to_dict(orient="records"),
+    # Each column requires at least `name` and `id`. `name` is the string that will be
+    # used as the column header. `id` is the name of the column from the DataFrame from
+    # which to take the data from.
+    columns=[
+        {
+            "name": "Month",
+            "id": "Month",
+        },
+        {
+            "name": "Day",
+            "id": "Day",
+        },
+        {
+            "name": "Precipitation",
+            "id": "Precipitation",
+            "type": "numeric",
+            "format": Format(precision=2, scheme=Scheme.fixed),
+        },
+        {
+            "name": "Temperature",
+            "id": "Temperature",
+            "type": "numeric",
+            "format": Format(precision=1, scheme=Scheme.fixed),
+        },
+    ],
+    style_as_list_view=True,
+    style_header={
+        "color": "var(--bs-white)",
+        "fontWeight": "bold",
+        "backgroundColor": "var(--bs-primary)",
+    },
+    style_cell_conditional=[
+        {"if": {"column_id": col}, "textAlign": "left"} for col in ["Month"]
+    ],
+    style_cell={"padding": "10px"},
+    style_data_conditional=[
+        {"if": {"row_index": "odd"}, "backgroundColor": "var(--bs-gray-300)"}
+    ],
+)

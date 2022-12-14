@@ -1,47 +1,33 @@
-"""Load data resources."""
+"""Load data resources.
+
+Loads data into DataFrames for further processing and for the production of example
+figures and tables.
+
+Variables:
+    hawaii_weather_data
+    playoff_teams
+Functions:
+    load_sqlite_data
+"""
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, TypeAlias
+from typing import TYPE_CHECKING
 
 import ibis
 import pandas as pd
-from ibis.expr.types.relations import Table
+from pandas import DataFrame
 
 from utils.constants import DATA_DIR, GOOGLE_DRIVE_DIR
 
 if TYPE_CHECKING:
     from pathlib import Path
 
-DataFrames: TypeAlias = tuple[pd.DataFrame, ...]
 
+def load_sqlite_data(path: Path) -> dict[str, DataFrame]:
+    """Read sqlite database and return a dict of DataFrames.
 
-def load_data(data_dir: Path, google_drive_dir: Path) -> DataFrames:
-    """Load data resources into appropriate data structures.
-
-    Parameters
-    ----------
-    data_dir : Path
-        pathlib Path to the project's data directory.
-    google_drive_dir : Path
-        pathlib Path to a shared google drive collaboration directory.
-
-    Returns
-    -------
-    tuple
-        Contains DataFrames created from the data resources.
-
-    """
-    # Load NBA playoff team data from 1996-97 to 2021-22.
-    playoff_teams = pd.read_csv(data_dir / "playoff_teams_df.csv")
-    # Load Hawaii weather measurements and station data.
-    measurement, station = load_hawaii_weather(path=google_drive_dir / "hawaii.sqlite")
-
-    return playoff_teams, measurement, station
-
-
-def load_hawaii_weather(path: Path) -> DataFrames:
-    """Read sqlite db of Hawaii weather data.
+    Returns all tables within a sqlite database as DataFrames without any processing.
 
     Parameters
     ----------
@@ -50,23 +36,17 @@ def load_hawaii_weather(path: Path) -> DataFrames:
 
     Returns
     -------
-    tuple
-        Contains DataFrames of measurement and station data.
+    dict[str, DataFrame]
+        Keys are the table names and values are the associated DataFrames.
     """
-    # Connect to the db
+    # Connect to the db.
     db = ibis.sqlite.connect(path)
-    tables = db.list_tables()
-    # measurement and station are ibis Table instances.
-    measurement: Table = db.table(name=tables[0])
-    # print("from load_data.py, load_hawaii_weather function:", type(measurement))
-    station: Table = db.table(name=tables[1])
-
-    # `execute()` creates DataFrames from the Tables.
-    return measurement.execute(), station.execute()
+    # Collect table names.
+    tables_names = db.list_tables()
+    # `db.table()` returns an ibis `Table` instance and `execute()` converts it into a
+    # DataFrame.
+    return {name: db.table(name=name).execute() for name in tables_names}
 
 
-# Load Data ----------------------------------------------------------------------------
-playoff_teams, measurement, station = load_data(
-    data_dir=DATA_DIR,
-    google_drive_dir=GOOGLE_DRIVE_DIR,
-)
+hawaii_weather_data = load_sqlite_data(path=GOOGLE_DRIVE_DIR / "hawaii.sqlite")
+playoff_teams = pd.read_csv(DATA_DIR / "playoff_teams_df.csv")

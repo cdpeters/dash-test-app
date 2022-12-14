@@ -3,7 +3,7 @@ default_language_version:
 repos:
 # Style Formatters
 - repo: https://github.com/psf/black
-  rev: 22.10.0
+  rev: 22.12.0
   hooks:
   - id: black-jupyter
 - repo: https://github.com/PyCQA/isort
@@ -41,4 +41,4 @@ repos:
   hooks:
   - id: poetry-check
   - id: poetry-lock
-    args: [--no-update]
+    args: [--check]

@@ -14,10 +14,10 @@ layout = dbc.Container(
     [
         html.H1(
             "Welcome to the Dash Test App",
-            className="display-2",
+            className="display-4 fw-bold mt-5 pt-4",
             style={"textAlign": "center"},
         ),
     ],
     fluid=True,
-    className="mt-5 pt-4",
+    className="d-flex align-content-center justify-content-center",
 )

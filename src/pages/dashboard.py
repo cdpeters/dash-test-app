@@ -23,24 +23,24 @@ register_page(__name__, navbar=True)
 bar_chart_row = dbc.Row(
     dbc.Col(bar_chart, width=8),
     justify="center",
-    class_name="my-3",
+    class_name="my-2 g-0",
 )
 
 # Create line chart row.
 hawaii_line_chart_row = dbc.Row(
     [
-        dbc.Col(avg_temp_line_chart, width=6),
-        dbc.Col(avg_precip_line_chart, width=6),
+        dbc.Col(avg_temp_line_chart, width=6, class_name="px-0"),
+        dbc.Col(avg_precip_line_chart, width=6, class_name="px-0"),
     ],
     justify="center",
-    class_name="my-3",
+    class_name="my-2",
 )
 
 # Create table row.
 table_row = dbc.Row(
     dbc.Col(hawaii_climate_table, width=10),
     justify="center",
-    class_name="my-3",
+    class_name="my-2",
 )
 
 # `layout` is required for Dash multi-page apps.

@@ -28,6 +28,7 @@ bar_chart = Graph(
         y="Amount",
         color="City",
         barmode="group",
+        height=350,
     ),
 )
 
@@ -42,6 +43,7 @@ avg_temp_line_chart = Graph(
         color="Month",
         markers=True,
         labels={"Day": "Day of month"},
+        height=350,
     ),
 )
 
@@ -56,6 +58,7 @@ avg_precip_line_chart = Graph(
         color="Month",
         markers=True,
         labels={"Day": "Day of month"},
+        height=350,
     ),
 )
 

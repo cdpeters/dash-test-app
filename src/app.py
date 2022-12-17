@@ -6,9 +6,10 @@ Variables:
 
 import dash
 import dash_bootstrap_components as dbc
-from dash import Dash
+from dash import Dash, html
 
-from components.navbar import create_navbar_component
+from components.navbar import navbar_component
+from components.sidebar import create_sidebar_component
 from utils.constants import DBC_CSS, DEFAULT_THEME
 
 # Creates app, sets external stylesheets, and configures the app to be multi-page.
@@ -22,11 +23,22 @@ app = Dash(
 # Place the navbar and the container for page content within the app.
 app.layout = dbc.Container(
     [
-        create_navbar_component(page_registry=dash.page_registry),
-        # Location for page contents.
-        dash.page_container,
+        html.Div(
+            create_sidebar_component(page_registry=dash.page_registry),
+            className="sidebar",
+        ),
+        html.Div(className="hidden-sidebar-div"),
+        dbc.Container(
+            [
+                navbar_component,
+                # Location for page contents.
+                dash.page_container,
+            ],
+            class_name="px-0",
+            fluid=True,
+        ),
     ],
-    class_name="dbc px-0 vh-100",
+    class_name="dbc d-flex px-0 vh-auto",
     fluid=True,
 )
 

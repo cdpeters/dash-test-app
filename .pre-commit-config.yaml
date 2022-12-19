@@ -17,7 +17,7 @@ repos:
   rev: 1.5.0  # or master if you're bold
   hooks:
   - id: interrogate
-    args: [--verbose, --ignore-init-module, --fail-under=100, src]
+    args: [--verbose, --ignore-init-module, --fail-under=100]
 # Linter
 - repo: https://github.com/PyCQA/flake8
   rev: 5.0.4
@@ -35,6 +35,7 @@ repos:
   - id: check-case-conflict
   - id: check-ast
   - id: check-added-large-files
+    args: [--maxkb=25000]
 # Check and Sync Environment Files
 - repo: https://github.com/python-poetry/poetry
   rev: 1.2.2

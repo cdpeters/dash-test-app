@@ -1,6 +1,7 @@
 examples/
 secrets.toml
 .vscode/
+node_modules/
 
 
 # Byte-compiled / optimized / DLL files

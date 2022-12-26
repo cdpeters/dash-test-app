@@ -5,41 +5,38 @@ Variables:
 """
 
 import dash
-import dash_bootstrap_components as dbc
 from dash import Dash, html
 
 from components.navbar import navbar_component
 from components.sidebar import create_sidebar_component
-from utils.constants import DBC_CSS, DEFAULT_THEME
 
 # Creates app, sets external stylesheets, and configures the app to be multi-page.
 app = Dash(
     name=__name__,
-    external_stylesheets=[DEFAULT_THEME["cdn_url"], DBC_CSS],
+    # external_scripts=[TAILWIND_CDN],
     use_pages=True,
     title="Dash Test App",
+    assets_ignore="input.css",
 )
 
 # Place the navbar and the container for page content within the app.
-app.layout = dbc.Container(
+app.layout = html.Div(
     [
         html.Div(
             create_sidebar_component(page_registry=dash.page_registry),
-            className="sidebar",
+            className="bg-pink-400",
         ),
-        html.Div(className="hidden-sidebar-div"),
-        dbc.Container(
+        # Hidden sidebar sized div to move the navbar and content out from under the
+        # sidebar.
+        html.Div(),
+        html.Div(
             [
                 navbar_component,
                 # Location for page contents.
                 dash.page_container,
             ],
-            class_name="px-0",
-            fluid=True,
         ),
     ],
-    class_name="dbc d-flex px-0 vh-auto",
-    fluid=True,
 )
 
 if __name__ == "__main__":

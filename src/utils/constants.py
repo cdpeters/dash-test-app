@@ -9,12 +9,8 @@ Constants:
         GOOGLE_DRIVE_DIR: Path to shared google drive collaboration folder.
         DATA_DIR: Path to the `data` directory in the project root (`dash-test-app`).
 
-    Theme Selection:
-        THEMES: Contains the name and cdn_url's for all the available bootstrap themes.
-        DEFAULT_THEME
-
-    Stylesheets:
-        DBC_CSS: Stylesheet that yields the `dbc` class for outer container of app.
+    External Scripts:
+        TAILWIND_CDN: Script that adds support for tailwind css.
 
     Brand Logo:
         DATA_COLLAB_LOGO
@@ -30,7 +26,6 @@ Constants:
 
 from pathlib import Path
 
-import dash_bootstrap_components.themes as dbc_themes
 import tomli
 
 # Data Directories ---------------------------------------------------------------------
@@ -46,32 +41,10 @@ GOOGLE_DRIVE_DIR = Path(secrets["google_drive"]["path"])
 DATA_DIR = Path(__file__).parents[2] / "data"
 
 
-# Theme Selection ----------------------------------------------------------------------
+# External Scripts ---------------------------------------------------------------------
 
-# `theme_name` is only used in this file.
-# templates = [BOOTSTRAP, CERULEAN, COSMO, CYBORG, DARKLY, FLATLY, JOURNAL, LITERA,
-# LUMEN, LUX, MATERIA, MINTY, MORPH, PULSE, QUARTZ, SANDSTONE, SIMPLEX, SKETCHY, SLATE,
-# SOLAR, SPACELAB, SUPERHERO, UNITED, VAPOR, YETI, ZEPHYR]
-theme_names = [
-    item for item in dir(dbc_themes) if (not item.startswith("_")) and item != "GRID"
-]
-
-THEMES: dict[str, dict[str, str]] = {
-    theme_name: {"name": theme_name.lower(), "cdn_url": getattr(dbc_themes, theme_name)}
-    for theme_name in theme_names
-}
-
-DEFAULT_THEME = THEMES["MINTY"]
-
-
-# Stylesheets --------------------------------------------------------------------------
-
-# Stylesheet for styling dash core components (dcc) using the `className="dbc"` argument
-# applied to the outer container of a layout. See
-# https://github.com/AnnMarieW/dash-bootstrap-templates for usage.
-DBC_CSS = (
-    "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates@V1.0.2/dbc.min.css"
-)
+# Adds support for tailwind css.
+TAILWIND_CDN = "https://cdn.tailwindcss.com"
 
 
 # Brand Logo ---------------------------------------------------------------------------

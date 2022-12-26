@@ -9,7 +9,6 @@ Variables:
     layout
 """
 
-import dash_bootstrap_components as dbc
 from dash import html, register_page
 
 from components.figures import avg_precip_line_chart, avg_temp_line_chart, bar_chart
@@ -20,38 +19,30 @@ from components.table import hawaii_climate_table
 register_page(__name__, navbar=True)
 
 # Create bar chart row.
-bar_chart_row = dbc.Row(
-    dbc.Col(bar_chart, width=8),
-    justify="center",
-    class_name="my-2 g-0",
+bar_chart_row = html.Div(
+    html.Div(bar_chart),
 )
 
 # Create line chart row.
-hawaii_line_chart_row = dbc.Row(
+hawaii_line_chart_row = html.Div(
     [
-        dbc.Col(avg_temp_line_chart, width=6, class_name="px-0"),
-        dbc.Col(avg_precip_line_chart, width=6, class_name="px-0"),
+        html.Div(avg_temp_line_chart),
+        html.Div(avg_precip_line_chart),
     ],
-    justify="center",
-    class_name="my-2",
 )
 
 # Create table row.
-table_row = dbc.Row(
-    dbc.Col(hawaii_climate_table, width=10),
-    justify="center",
-    class_name="my-2",
+table_row = html.Div(
+    html.Div(hawaii_climate_table),
 )
 
 # `layout` is required for Dash multi-page apps.
-layout = dbc.Container(
+layout = html.Div(
     [
-        html.H2("Dashboard", className="mt-3"),
-        html.Hr(className="mt-2"),
+        html.H2("Dashboard"),
+        html.Hr(),
         bar_chart_row,
         hawaii_line_chart_row,
         table_row,
     ],
-    class_name="px-3",
-    fluid=True,
 )

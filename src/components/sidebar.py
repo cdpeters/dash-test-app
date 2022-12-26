@@ -11,7 +11,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-import dash_bootstrap_components as dbc
 from dash import html
 
 if TYPE_CHECKING:
@@ -20,7 +19,7 @@ if TYPE_CHECKING:
 
 def create_sidebar_component(
     page_registry: OrderedDict[str, dict[str, Any]]
-) -> dbc.Nav:
+) -> html.Div:
     """Create page links for navigation.
 
     `page_registry` page data is used to construct the navbar's page links. A page is
@@ -34,12 +33,12 @@ def create_sidebar_component(
 
     Returns
     -------
-    dbc.Nav
-        `Nav` container with a `NavLink` for each page.
+    html.Div
+        `A navbar with a link to each page.
     """
     page_links = [
-        dbc.NavLink(
-            page["name"], href=page["relative_path"], active="exact", class_name="py-1"
+        html.A(
+            page["name"], href=page["relative_path"], className="px-4 hover:bg-pink-500"
         )
         for page in page_registry.values()
         if page.get("navbar")
@@ -47,24 +46,16 @@ def create_sidebar_component(
 
     heading = html.Div(
         [
-            html.Div(
-                "Navigation",
-                className="ps-2 mb-1 mt-3",
-                style={"color": "white", "fontSize": 13, "fontWeight": "bold"},
-            ),
-            html.Hr(className="mt-1 mb-0", style={"color": "var(--bs-gray-300"}),
+            html.Div("Navigation", className="bg-purple-400"),
+            html.Hr(),
         ],
-        className="px-2",
     )
 
-    return dbc.Nav(
+    return html.Div(
         # `page_links`` has to be unpacked since it is a list (the `children` argument
         # list must not contain a list).
         [
             heading,
             *page_links,
         ],
-        class_name="flex-nowrap",
-        vertical=True,
-        pills=True,
     )

@@ -4,10 +4,9 @@ Variables:
     layout
 """
 
-import dash
-from dash import html
+from dash import html, register_page
 
-dash.register_page(__name__)
+register_page(__name__)
 
 layout = html.H4(
     "This page does not exist. Please use the page links to navigate the website."

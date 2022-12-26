@@ -10,17 +10,13 @@ Variables:
 """
 
 import plotly.express as px
-from dash.dcc import Graph
-from dash_bootstrap_templates import load_figure_template
+from dash import dcc
 
 from data.process_data import sample_data, transformed_measurement
-from utils.constants import DEFAULT_THEME, FIGURE_BAR, FIGURE_PRECIP, FIGURE_TEMP
-
-# Load figure template. Needed in order to apply the theme to the figures by default.
-load_figure_template(themes=DEFAULT_THEME["name"])
+from utils.constants import FIGURE_BAR, FIGURE_PRECIP, FIGURE_TEMP
 
 # Create `Graph` component containing a bar chart from `sample_data`.
-bar_chart = Graph(
+bar_chart = dcc.Graph(
     id=FIGURE_BAR,
     figure=px.bar(
         data_frame=sample_data,
@@ -30,10 +26,13 @@ bar_chart = Graph(
         barmode="group",
         height=350,
     ),
+    config={
+        "displayModeBar": False,
+    },
 )
 
 # Create `Graph` component containing average temperature data from Hawaii.
-avg_temp_line_chart = Graph(
+avg_temp_line_chart = dcc.Graph(
     id=FIGURE_TEMP,
     figure=px.line(
         data_frame=transformed_measurement,
@@ -45,10 +44,13 @@ avg_temp_line_chart = Graph(
         labels={"Day": "Day of month"},
         height=350,
     ),
+    config={
+        "displayModeBar": False,
+    },
 )
 
 # Create `Graph` component containing average precipitation data from Hawaii.
-avg_precip_line_chart = Graph(
+avg_precip_line_chart = dcc.Graph(
     id=FIGURE_PRECIP,
     figure=px.line(
         data_frame=transformed_measurement,
@@ -60,12 +62,15 @@ avg_precip_line_chart = Graph(
         labels={"Day": "Day of month"},
         height=350,
     ),
+    config={
+        "displayModeBar": False,
+    },
 )
 
 
 # def create_graph_component(
 #     plotting_func: Callable[..., go.Figure], id: str, fig_params: dict
-# ) -> Graph:
+# ) -> dcc.Graph:
 #     """Create a graph component for any plotly express figure type.
 
 #     Parameters
@@ -79,7 +84,7 @@ avg_precip_line_chart = Graph(
 
 #     Returns
 #     -------
-#     Graph
+#     dcc.Graph
 #         Graph object containing the figure.
 #     """
 #     figure = plotting_func(**fig_params)

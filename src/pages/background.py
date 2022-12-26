@@ -7,7 +7,6 @@ Variables:
     layout
 """
 
-import dash_bootstrap_components as dbc
 from dash import dcc, html, register_page
 
 register_page(__name__, navbar=True)
@@ -32,10 +31,10 @@ markdown = dcc.Markdown(
     """
 )
 
-layout = dbc.Container(
+layout = html.Div(
     [
-        html.H2("Project Background", className="mt-3"),
-        html.Hr(className="mt-2"),
+        html.H2("Project Background"),
+        html.Hr(),
         html.Div(
             """
             This app will serve as a testing ground for dashboard development.
@@ -47,6 +46,4 @@ layout = dbc.Container(
         markdown,
         html.Br(),
     ],
-    class_name="px-3",
-    fluid=True,
 )

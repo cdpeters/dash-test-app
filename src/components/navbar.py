@@ -30,7 +30,7 @@ brand_component = dbc.NavLink(
     dbc.Row(
         [
             # Brand logo.
-            dbc.Col(html.Img(src=DATA_COLLAB_LOGO, height="30px")),
+            dbc.Col(html.Img(src=DATA_COLLAB_LOGO, style={"height": "30px"})),
             # App name.
             dbc.Col(dbc.NavbarBrand("Dash Test App", class_name="mx-2")),
         ],
@@ -38,7 +38,7 @@ brand_component = dbc.NavLink(
         class_name="g-0",
     ),
     href="/",
-    class_name="ps-0",
+    class_name="ps-0 py-0",
 )
 
 
@@ -65,7 +65,7 @@ def create_page_link_component(
         # Use list comprehension to create a NavLink for each page.
         [
             dbc.NavLink(
-                page["name"], href=page["relative_path"], class_name="ps-3 pe-0"
+                page["name"], href=page["relative_path"], class_name="ps-3 pe-0 py-0"
             )
             for page in page_registry.values()
             if page.get("navbar")

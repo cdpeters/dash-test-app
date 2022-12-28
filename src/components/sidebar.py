@@ -13,6 +13,8 @@ from typing import TYPE_CHECKING, Any
 
 from dash import html
 
+from utils.constants import DATA_COLLAB_LOGO
+
 if TYPE_CHECKING:
     from collections import OrderedDict
 
@@ -38,17 +40,28 @@ def create_sidebar_component(
     """
     page_links = [
         html.A(
-            page["name"], href=page["relative_path"], className="px-4 hover:bg-pink-500"
+            [
+                html.Img(src=page["icon_path"], className="aspect-auto h-3"),
+                html.Div(
+                    page["name"], className="font-semibold text-inherit bg-inherit"
+                ),
+            ],
+            href=page["relative_path"],
+            className="""px-4 py-2 flex space-x-2 items-center text-emerald-50
+            hover:bg-slate-700 active:bg-emerald-50 active:text-slate-800
+            focus:bg-emerald-50 focus:text-slate-800""",
         )
         for page in page_registry.values()
         if page.get("navbar")
     ]
 
-    heading = html.Div(
+    heading = html.A(
         [
-            html.Div("Navigation", className="bg-purple-400"),
-            html.Hr(),
+            html.Img(src=DATA_COLLAB_LOGO, className="aspect-square h-5"),
+            html.Div("Dash Test App", className="font-semibold text-emerald-50"),
         ],
+        href="/",
+        className="px-1.5 py-2 flex space-x-1.5 items-center",
     )
 
     return html.Div(

@@ -29,6 +29,7 @@ bar_chart = dcc.Graph(
     config={
         "displayModeBar": False,
     },
+    className="aspect-video max-w-lg",
 )
 
 # Create `Graph` component containing average temperature data from Hawaii.
@@ -47,6 +48,7 @@ avg_temp_line_chart = dcc.Graph(
     config={
         "displayModeBar": False,
     },
+    className="aspect-video max-w-lg",
 )
 
 # Create `Graph` component containing average precipitation data from Hawaii.
@@ -65,6 +67,7 @@ avg_precip_line_chart = dcc.Graph(
     config={
         "displayModeBar": False,
     },
+    className="aspect-video max-w-lg",
 )
 
 

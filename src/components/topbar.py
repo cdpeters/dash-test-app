@@ -1,8 +1,8 @@
-"""Build a navbar component with branding.
+"""Build a topbar component with branding.
 
 Variables:
     branding
-    navbar_component
+    topbar_component
 """
 
 from dash import html
@@ -21,4 +21,4 @@ branding = html.A(
     href="/",
 )
 
-navbar_component = html.Div(branding)
+topbar_component = html.Div(branding)

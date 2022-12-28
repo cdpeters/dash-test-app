@@ -9,7 +9,7 @@ Variables:
 
 from dash import dcc, html, register_page
 
-register_page(__name__, navbar=True)
+register_page(__name__, navbar=True, icon_path="/assets/book.svg")
 
 markdown = dcc.Markdown(
     """
@@ -34,8 +34,7 @@ markdown = dcc.Markdown(
 layout = html.Div(
     [
         html.H2("Project Background"),
-        html.Hr(),
-        html.Div(
+        html.P(
             """
             This app will serve as a testing ground for dashboard development.
             The intention is to use it as boilerplate for creating dashboards in
@@ -43,7 +42,8 @@ layout = html.Div(
         """
         ),
         html.Br(),
-        markdown,
+        html.Div(markdown, className=""),
         html.Br(),
     ],
+    className="p-4 prose",
 )

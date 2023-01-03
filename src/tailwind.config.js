@@ -9,7 +9,11 @@ module.exports = {
     "./app.py"
   ],
   theme: {
-    extend: {},
+    // extend: {
+    //   backgroundImage: {
+    //     image: `url('/assets/images/data_science_background.png')`,
+    //   }
+    // },
   },
   plugins: [
     require('@tailwindcss/typography')

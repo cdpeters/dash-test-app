@@ -2,6 +2,7 @@ examples/
 secrets.toml
 .vscode/
 node_modules/
+src/assets/images/data_science_background.png
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -16,12 +16,13 @@ from typing import TYPE_CHECKING
 
 import ibis
 import pandas as pd
-from pandas import DataFrame
 
 from utils.constants import DATA_DIR, GOOGLE_DRIVE_DIR
 
 if TYPE_CHECKING:
     from pathlib import Path
+
+    from pandas import DataFrame
 
 
 def load_sqlite_data(path: Path) -> dict[str, DataFrame]:

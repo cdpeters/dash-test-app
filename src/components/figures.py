@@ -16,58 +16,96 @@ from data.process_data import sample_data, transformed_measurement
 from utils.constants import FIGURE_BAR, FIGURE_PRECIP, FIGURE_TEMP
 
 # Create `Graph` component containing a bar chart from `sample_data`.
+bar_chart = px.bar(
+    data_frame=sample_data,
+    x="Fruit",
+    y="Amount",
+    color="City",
+    barmode="group",
+)
+
+bar_chart.update_layout(
+    legend={
+        "orientation": "h",
+        "xanchor": "right",
+        "yanchor": "bottom",
+        "x": 1,
+        "y": 1.02,
+    },
+    font={"size": 11},
+)
+
 bar_chart = dcc.Graph(
     id=FIGURE_BAR,
-    figure=px.bar(
-        data_frame=sample_data,
-        x="Fruit",
-        y="Amount",
-        color="City",
-        barmode="group",
-        height=350,
-    ),
+    figure=bar_chart,
     config={
         "displayModeBar": False,
     },
-    className="aspect-video max-w-lg",
+    className="max-w-lg shadow-md",
 )
 
 # Create `Graph` component containing average temperature data from Hawaii.
+avg_temp_line_chart = px.line(
+    data_frame=transformed_measurement,
+    x="Day",
+    y="Temperature",
+    title="Average Daily Temperature in Hawaii",
+    color="Month",
+    markers=True,
+    labels={"Day": "Day of month"},
+    height=350,
+)
+
+avg_temp_line_chart.update_layout(
+    legend={
+        "orientation": "h",
+        "xanchor": "right",
+        "yanchor": "bottom",
+        "x": 1,
+        "y": 1.02,
+    },
+    font={"size": 11},
+)
+
 avg_temp_line_chart = dcc.Graph(
     id=FIGURE_TEMP,
-    figure=px.line(
-        data_frame=transformed_measurement,
-        x="Day",
-        y="Temperature",
-        title="Average Daily Temperature in Hawaii",
-        color="Month",
-        markers=True,
-        labels={"Day": "Day of month"},
-        height=350,
-    ),
+    figure=avg_temp_line_chart,
     config={
         "displayModeBar": False,
     },
-    className="aspect-video max-w-lg",
+    className="max-w-lg shadow-md",
 )
 
 # Create `Graph` component containing average precipitation data from Hawaii.
+avg_precip_line_chart = px.line(
+    data_frame=transformed_measurement,
+    x="Day",
+    y="Precipitation",
+    title="Average Daily Precipitation in Hawaii",
+    color="Month",
+    markers=True,
+    labels={"Day": "Day of month"},
+    height=350,
+)
+
+avg_precip_line_chart.update_layout(
+    legend={
+        "orientation": "h",
+        "xanchor": "right",
+        "yanchor": "bottom",
+        "x": 1,
+        "y": 1.02,
+    },
+    font={"size": 11},
+)
+
 avg_precip_line_chart = dcc.Graph(
     id=FIGURE_PRECIP,
-    figure=px.line(
-        data_frame=transformed_measurement,
-        x="Day",
-        y="Precipitation",
-        title="Average Daily Precipitation in Hawaii",
-        color="Month",
-        markers=True,
-        labels={"Day": "Day of month"},
-        height=350,
-    ),
+    figure=avg_precip_line_chart,
     config={
         "displayModeBar": False,
     },
-    className="aspect-video max-w-lg",
+    className="max-w-lg shadow-md",
 )
 
 

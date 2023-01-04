@@ -9,7 +9,9 @@ Variables:
 
 from dash import dcc, html, register_page
 
-register_page(__name__, navbar=True, icon_path="/assets/book.svg")
+from utils.constants import BACKGROUND_PAGE_ICON
+
+register_page(__name__, sidebar=True, icon_path=BACKGROUND_PAGE_ICON)
 
 markdown = dcc.Markdown(
     """
@@ -28,22 +30,27 @@ markdown = dcc.Markdown(
         }
     )
     ```
-    """
+    """,
 )
 
 layout = html.Div(
     [
-        html.H2("Project Background"),
-        html.P(
-            """
-            This app will serve as a testing ground for dashboard development.
-            The intention is to use it as boilerplate for creating dashboards in
-            future projects.
-        """
+        html.Div(
+            "Project Background",
+            className="""py-1.5 flex justify-center bg-slate-700 text-emerald-50
+            font-semibold""",
         ),
-        html.Br(),
-        html.Div(markdown, className=""),
-        html.Br(),
+        html.Div(
+            [
+                html.P(
+                    """This app will serve as a testing ground for dashboard
+                    development. The intention is to use it as boilerplate for creating
+                    dashboards in future projects."""
+                ),
+                html.Div(markdown),
+            ],
+            className="py-4 prose prose-slate max-w-2xl mx-auto",
+        ),
     ],
-    className="p-4 prose",
+    className="min-h-screen",
 )

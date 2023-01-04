@@ -40,15 +40,17 @@ hawaii_climate_table = DataTable(
     ],
     style_as_list_view=True,
     style_header={
-        "color": "var(--bs-white)",
+        "color": "#ecfdf5",
         "fontWeight": "bold",
-        "backgroundColor": "var(--bs-primary)",
+        "backgroundColor": "#475569",
     },
     style_cell_conditional=[
         {"if": {"column_id": col}, "textAlign": "left"} for col in ["Month"]
     ],
     style_cell={"padding": "10px"},
+    style_data={"border": "none"},
     style_data_conditional=[
-        {"if": {"row_index": "odd"}, "backgroundColor": "var(--bs-gray-300)"}
+        {"if": {"row_index": "odd"}, "backgroundColor": "#f1f5f9"},
+        {"if": {"row_index": "even"}, "backgroundColor": "#f8fafc"},
     ],
 )

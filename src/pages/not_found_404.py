@@ -8,6 +8,11 @@ from dash import html, register_page
 
 register_page(__name__)
 
-layout = html.H4(
-    "This page does not exist. Please use the page links to navigate the website."
+layout = html.Div(
+    html.Div(
+        """This page does not exist. Please use the page links in the sidebar to
+        navigate the website.""",
+        className="text-lg text-slate-700",
+    ),
+    className="flex items-center justify-center h-screen",
 )

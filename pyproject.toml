@@ -28,12 +28,14 @@ mypy = "^0.991"
 sphinx = "^5.3.0"
 docrepr = "^0.2.0"
 pandas-stubs = {version = "^1.5.1", python = ">=3.10,<3.12"}
+nbqa = "^1.6.0"
+blacken-docs = "^1.12.1"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.2.0"
 
 [tool.black]
-target-version = ['py310']
+target-version = ["py310"]
 
 [tool.isort]
 profile = "black"
@@ -53,6 +55,14 @@ module = [
     "ibis.*"
 ]
 ignore_missing_imports = true
+
+[tool.nbqa.addopts]
+interrogate = [
+    "--ignore-module"
+]
+
+[tool.nbqa.md]
+blacken-docs = true
 
 [tool.pytest.ini_options]
 pythonpath = [".", "src"]

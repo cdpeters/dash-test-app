@@ -1,7 +1,7 @@
 [flake8]
-# For compatibility with Black and ignore docstring at module level.
+# For compatibility with Black and to ignore missing docstring at package level.
 max-line-length = 88
-extend-ignore = E203, D104, D100
+extend-ignore = E203, D104
 
-# Check docstrings
+# Check docstrings using the numpy docstring profile.
 docstring-convention = numpy

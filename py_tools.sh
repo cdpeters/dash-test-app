@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# The following script runs development tools such as code formatters, docstring
+# coverage, linting, and type checking on python files (.py) only.
+
 # Get the name of the current directory
 current_dir=$(basename "$(pwd)")
 # Assign the names of the project and app directories
@@ -25,9 +28,9 @@ echo -e "${cyan}Running ${bcyan}isort${cyan} (import formatter):${color_off}"
 
 isort .
 
-# Docstring Existence Checker: interrogate
+# Docstring Coverage: interrogate
 echo
-echo -e "${cyan}Running ${bcyan}interrogate${cyan} (check docstrings exist):${color_off}"
+echo -e "${cyan}Running ${bcyan}interrogate${cyan} (docstring coverage):${color_off}"
 
 interrogate .
 

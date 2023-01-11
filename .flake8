@@ -3,5 +3,12 @@
 max-line-length = 88
 extend-ignore = E203, D104
 
+# Additional exlude patterns
+extend-exclude =
+    .ipynb_checkpoints,
+    .mypy_cache,
+    .pytest_cache,
+    node_modules
+
 # Check docstrings using the numpy docstring profile.
 docstring-convention = numpy

@@ -1,9 +1,3 @@
----
-title: Data Project Creation/Installation Instructions
-created: 2022-11-29T17:47:19.640Z
-modified: 2023-01-13T09:16:27.332Z
----
-
 # Data Project Creation/Installation Instructions
 
 > This guide is not intended to be read in its entirety. Ready only the sections corresponding to your role in the project as defined in the first section below, or just use the guide as a reference when needed.
@@ -59,7 +53,7 @@ modified: 2023-01-13T09:16:27.332Z
 
 1. Create the project directory structure
 1. Create a `secrets.toml` file
-1. Add `secrets.toml` to `.gitignore` ==**WARNING: Do not skip this step!**==
+1. Add `secrets.toml` to `.gitignore` **WARNING: Do not skip this step!**
 
 > **Project creation is complete. Project is ready to be worked on and shared with collaborators!**
 
@@ -158,7 +152,7 @@ modified: 2023-01-13T09:16:27.332Z
 					- the file that holds your project and dev dependencies as well as some configuration for dev tools
 				- `poetry.lock`:
 					- Generated from `pyproject.toml` via the `poetry lock` command (or auto-generated at initialization). Contains all the project and dev dependencies **and** their sub-dependencies with their versions "locked". Environments will be reproduced via this file in combination with an `environment.yml` file (which captures the `conda` specific packages)
-					- ==**DON'T MODIFY `poetry.lock` DIRECTLY!**== This file should always be generated from the `pyproject.toml` file
+					- **DON'T MODIFY `poetry.lock` DIRECTLY!** This file should always be generated from the `pyproject.toml` file
 			- Initialization:
 				```shell
 				poetry init
@@ -285,7 +279,7 @@ modified: 2023-01-13T09:16:27.332Z
 		- Database URL
 		- API keys
 		- Local machine specific paths such as the path to the Google Drive collaboration folder
-1. Add `secrets.toml` to `.gitignore` ==**WARNING: Do not skip this step!**==
+1. Add `secrets.toml` to `.gitignore` **WARNING: Do not skip this step!**
 	- Ensure that this file does not get committed to the remote repo (i.e. the online GitHub repo)
 
 > **Project creation is complete. Ready to use and share with collaborators!**

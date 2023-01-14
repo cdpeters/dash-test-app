@@ -166,7 +166,7 @@ while [ $# -gt 0 ]; do
       # Check if a type was provided.
       if [[ $# -eq 0 || "$1" =~ ^(-|--) ]]; then
         echo
-        echo "Error: No type provided to \"${option}\". Please provide py|all as an argument."
+        echo "Error: No type provided to \"${option}\". Please provide all|py as an argument."
         echo
         exit 1
       fi
@@ -174,7 +174,7 @@ while [ $# -gt 0 ]; do
       # Type Option Processing -------------------------------------------------
       # Add the type to the type_args array up until there are no more args or
       # you reach the next cli option. Since only 1 type should be passed in
-      # (and it must be py|all), error checking must handle the case of too many
+      # (and it must be all|py), error checking must handle the case of too many
       # args passed to -t|--type.
       for i in "$@"; do
         # Break if you reach a cli option.
@@ -185,7 +185,7 @@ while [ $# -gt 0 ]; do
         shift
         if [[ ${#type_args[@]} -gt 1 ]]; then
           echo
-          echo "Error: Too many arguments supplied to \"${option}\". Please provide only py|all as"
+          echo "Error: Too many arguments supplied to \"${option}\". Please provide only all|py as"
           echo "an argument."
           echo
           exit 1
@@ -199,7 +199,7 @@ while [ $# -gt 0 ]; do
         file_type="all"
       else
         echo
-        echo "Error: Argument to -t|--type must be either py|all."
+        echo "Error: Argument to -t|--type must be either all|py."
         echo
         exit 1
       fi
@@ -209,9 +209,12 @@ while [ $# -gt 0 ]; do
       echo
       echo "-------------------------------  tools.sh Help  -------------------------------"
       echo
-      echo "tools.sh runs development tools on jupyter notebooks (.ipynb) only by default."
-      echo "CLI options allow for running these tools on python and markdown files as well"
-      echo "as skipping any of the tools if needed."
+      echo "tools.sh runs development tools on project files from either the project root"
+      echo "directory or any of the first level directories within the root. The default"
+      echo "behavior is to run these tools on jupyter notebooks (.ipynb) only. CLI options"
+      echo "allow for modifying this behavior to be able to run these tools on python and"
+      echo "markdown files as well. Additionally, there is an option to allow for skipping"
+      echo "tools during the run process if needed."
       echo
       echo
       echo "Current Tools In Use:"

@@ -44,6 +44,7 @@ profile = "black"
 ignore-init-module = true
 fail-under = 100
 verbose = 1
+exclude = ["*.ipynb_checkpoints*"]
 
 [tool.mypy]
 python_version = "3.10"

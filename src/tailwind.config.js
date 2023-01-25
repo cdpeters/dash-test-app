@@ -8,13 +8,6 @@ module.exports = {
     "./utils/**/*.{py,html,js}",
     "./app.py"
   ],
-  theme: {
-    // extend: {
-    //   backgroundImage: {
-    //     image: `url('/assets/images/data_science_background.png')`,
-    //   }
-    // },
-  },
   plugins: [
     require('@tailwindcss/typography')
   ],

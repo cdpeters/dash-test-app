@@ -68,6 +68,7 @@
 		1. Activate the environment.
 		1. Copy this environment's `environment.yml` and `pyproject.toml` files into the current project's root directory.
 		> **Result**: An existing Python environment with its dev tools **and** its project dependencies ready to use.
+1. Make the Python environment available as a kernel to Jupyter Lab if it hasn't been made available already.
 1. Add any separate dev tool config files and the dev tool CLI (command line interface) script `tools.sh` to the current project's root directory.
 1. Install `pre-commit` hooks.
 1. Create the project directory structure.
@@ -104,6 +105,7 @@
 1. Clone the GitHub repo to your computer.
 1. If there is an active `conda` or other python environment, deactivate it.
 1. Create `conda` environment from `environment.yml` file **and activate it**.
+1. Make the Python environment available as a kernel to Jupyter Lab if it hasn't been made available already.
 1. Install dependencies via `poetry install`.
 1. Install `pre-commit` hooks.
 1. Create a `secrets.toml` file.
@@ -232,12 +234,13 @@
 
 		1. Copy `environment.yml` and `pyproject.toml` into the current project's root directory.
 		1. Create `conda` environment from `environment.yml` file **and activate it**.
-			```shell
-			conda env create -f environment.yml
-			```
-			- `-f` tells `conda` to create the environment from a file.
-			- The environment's name is drawn from the `name` field in the `environment.yml` file. This is why a name is not specified in the command above.
-			- Activate `<env_name>` (the name should have been printed in the terminal from the previous command, you can also open the `environment.yml` file and look for the `name` field):
+			1. Create `conda` environment from `environment.yml` file:
+				```shell
+				conda env create -f environment.yml
+				```
+				- `-f` tells `conda` to create the environment from a file.
+				- The environment's name is drawn from the `name` field in the `environment.yml` file. This is why a name is not specified in the command above.
+			1. Activate `<env_name>` (the name should have been printed in the terminal from the previous command, you can also open the `environment.yml` file and look for the `name` field):
 				```shell
 				conda activate <env_name>
 				```
@@ -256,6 +259,24 @@
 		1. Copy this environment's `environment.yml` and `pyproject.toml` files into the current project's root directory.
 
 		> **Result**: An existing Python environment with its dev tools **and** its project dependencies ready to use.
+1. Make the Python environment available as a kernel to Jupyter Lab if it hasn't been made available already.
+	- Note, the following instructions can be applied to Jupyter if that is preferred over Jupyter Lab with minor changes to the commands.
+	1. Activate `<env_name>` environment:
+		```shell
+		conda activate <env_name>
+		```
+	2. If Jupyter Lab is not already installed, install it with the following:
+		```shell
+		poetry add jupyterlab
+		```
+		- If you're working on a project that is intended to be a website, it might be a better idea to put the Jupyter Lab dependency in the `dev` dependency group with the following command:
+			```shell
+			poetry add jupyterlab --group dev
+			```
+	3. Install the environment in Jupyter Lab:
+		```shell
+		python -m ipykernel install --user --name <env_name>
+		```
 1. Add any separate dev tool config files and the dev tool CLI (command line interface) script `tools.sh` to the current project's root directory.
 	- The following config files and CLI script can be found in the [*Dash Test App*](https://github.com/cdpeters/dash-test-app):
 		- `.flake8` - flake8 config
@@ -287,11 +308,11 @@
 		<img src="images/top_level_project_directory_tree_scaled.svg" />
 	</div>
 1. Create a `secrets.toml` file.
-	```toml
-	[google_drive]
-	path = 'path/to/google/drive/collaboration/data/folder'
-	```
-	- Add the `path` variable to a `google_drive` heading at the top of the file.
+	1. Add the `path` variable to a `google_drive` heading at the top of the file:
+		```toml
+		[google_drive]
+		path = 'path/to/google/drive/collaboration/data/folder'
+		```
 	- This file will contain any secrets the project requires, examples:
 		- Database username and password
 		- Database URL
@@ -388,14 +409,33 @@
 		conda deactivate
 		```
 1. Create `conda` environment from `environment.yml` file **and activate it**.
-	```shell
-	conda env create -f environment.yml
-	```
-	- `-f` tells `conda` to create the environment from a file.
-	- The environment's name is drawn from the `name` field in the `environment.yml` file. This is why a name is not specified in the command above.
-	- Activate `<env_name>` (the name should have been printed in the terminal from the previous command, you can also open the `environment.yml` file and look for the `name` field):
+	1. Create `conda` environment from `environment.yml` file:
+		```shell
+		conda env create -f environment.yml
+		```
+		- `-f` tells `conda` to create the environment from a file.
+		- The environment's name is drawn from the `name` field in the `environment.yml` file. This is why a name is not specified in the command above.
+	1. Activate `<env_name>` (the name should have been printed in the terminal from the previous command, you can also open the `environment.yml` file and look for the `name` field):
 		```shell
 		conda activate <env_name>
+		```
+1. Make the Python environment available as a kernel to Jupyter Lab if it hasn't been made available already.
+	- Note, the following instructions can be applied to Jupyter if that is preferred over Jupyter Lab with minor changes to the commands.
+	1. Activate `<env_name>` environment:
+		```shell
+		conda activate <env_name>
+		```
+	2. If Jupyter Lab is not already installed, install it with the following:
+		```shell
+		poetry add jupyterlab
+		```
+		- If you're working on a project that is intended to be a website, it might be a better idea to put the Jupyter Lab dependency in the `dev` dependency group with the following command:
+			```shell
+			poetry add jupyterlab --group dev
+			```
+	3. Install the environment in Jupyter Lab:
+		```shell
+		python -m ipykernel install --user --name <env_name>
 		```
 1. Install dependencies via `poetry install`.
 	```shell
@@ -416,11 +456,11 @@
 		- It is useful to establish this baseline when the hooks are first installed, or when a new hook is added, since the hooks normally only run on files that have changed and would otherwise not get run on files that already existed in the project never get modified.
 		- If the tool `interrogate` fails due to missing docstrings in `__init__.py` files, this failure can be ignored or a placeholder docstring can be added to that particular `__init_.py` file.
 1. Create a `secrets.toml` file.
-	```toml
-	[google_drive]
-	path = 'path/to/google/drive/collaboration/data/folder'
-	```
-	- Add the `path` variable to a `google_drive` heading at the top of the file.
+	1. Add the `path` variable to a `google_drive` heading at the top of the file:
+		```toml
+		[google_drive]
+		path = 'path/to/google/drive/collaboration/data/folder'
+		```
 	- This file will contain any secrets the project requires, examples:
 		- Database username and password
 		- Database URL

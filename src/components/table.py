@@ -38,6 +38,9 @@ hawaii_climate_table = DataTable(
             "format": Format(precision=1, scheme=Scheme.fixed),
         },
     ],
+    page_action="none",
+    style_table={"height": "350px", "overflowY": "auto"},
+    fixed_rows={"headers": True},
     style_as_list_view=True,
     style_header={
         "color": "#ecfdf5",

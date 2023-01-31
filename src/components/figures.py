@@ -22,6 +22,7 @@ bar_chart = px.bar(
     y="Amount",
     color="City",
     barmode="group",
+    height=350,
 )
 
 bar_chart.update_layout(

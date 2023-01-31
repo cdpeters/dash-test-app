@@ -21,6 +21,16 @@ register_page(__name__, sidebar=True, icon_path=DASHBOARD_PAGE_ICON)
 
 climate_table = html.Div(hawaii_climate_table, className="max-w-lg shadow-md")
 
+dashboard_grid = html.Div(
+    [
+        html.Div(bar_chart, className="w-auto"),
+        html.Div(avg_temp_line_chart, className="w-auto"),
+        html.Div(hawaii_climate_table, className="w-auto"),
+        html.Div(avg_precip_line_chart, className="w-auto"),
+    ],
+    className="grid grid-rows-2 grid-cols-2 gap-2 mb-8",
+)
+
 # `layout` is required for Dash multi-page apps.
 layout = html.Div(
     [
@@ -35,18 +45,7 @@ layout = html.Div(
                     "This is the Dash Test App dashboard.",
                     className="mb-4 text-inherit",
                 ),
-                html.Div(
-                    [
-                        bar_chart,
-                        html.Br(),
-                        avg_temp_line_chart,
-                        html.Br(),
-                        avg_precip_line_chart,
-                        html.Br(),
-                        climate_table,
-                    ],
-                    className="pb-6 text-inherit",
-                ),
+                dashboard_grid,
             ],
             className="p-4 text-slate-700",
         ),

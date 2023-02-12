@@ -31,5 +31,5 @@ footer_component = html.Div(
         ],
         className="py-1.5 bg-slate-700 flex items-center justify-between text-sm",
     ),
-    className="fixed left-32 bottom-0 right-0",
+    className="fixed left-32 bottom-0 right-0 z-40",
 )

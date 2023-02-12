@@ -13,7 +13,7 @@ import plotly.express as px
 from dash import dcc
 
 from data.process_data import sample_data, transformed_measurement
-from utils.constants import FIGURE_BAR, FIGURE_PRECIP, FIGURE_TEMP
+from utils.constants import ID_FIGURE_BAR, ID_FIGURE_PRECIP, ID_FIGURE_TEMP
 
 # Create `Graph` component containing a bar chart from `sample_data`.
 bar_chart = px.bar(
@@ -34,15 +34,15 @@ bar_chart.update_layout(
         "y": 1.02,
     },
     font={"size": 11},
+    margin=dict(l=53, r=30, t=20, b=50),
 )
 
 bar_chart = dcc.Graph(
-    id=FIGURE_BAR,
+    id=ID_FIGURE_BAR,
     figure=bar_chart,
     config={
         "displayModeBar": False,
     },
-    className="max-w-lg shadow-md",
 )
 
 # Create `Graph` component containing average temperature data from Hawaii.
@@ -66,15 +66,15 @@ avg_temp_line_chart.update_layout(
         "y": 1.02,
     },
     font={"size": 11},
+    margin=dict(l=60, r=30, t=70, b=50),
 )
 
 avg_temp_line_chart = dcc.Graph(
-    id=FIGURE_TEMP,
+    id=ID_FIGURE_TEMP,
     figure=avg_temp_line_chart,
     config={
         "displayModeBar": False,
     },
-    className="max-w-lg shadow-md",
 )
 
 # Create `Graph` component containing average precipitation data from Hawaii.
@@ -98,15 +98,15 @@ avg_precip_line_chart.update_layout(
         "y": 1.02,
     },
     font={"size": 11},
+    margin=dict(l=60, r=30, t=70, b=50),
 )
 
 avg_precip_line_chart = dcc.Graph(
-    id=FIGURE_PRECIP,
+    id=ID_FIGURE_PRECIP,
     figure=avg_precip_line_chart,
     config={
         "displayModeBar": False,
     },
-    className="max-w-lg shadow-md",
 )
 
 

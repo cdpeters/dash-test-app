@@ -22,7 +22,7 @@ app = Dash(
 app.layout = html.Div(
     [
         # Sidebar.
-        create_sidebar_component(page_registry=dash.page_registry),
+        create_sidebar_component(),
         # Main Content.
         html.Div(
             [

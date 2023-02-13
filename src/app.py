@@ -18,6 +18,8 @@ app = Dash(
     assets_ignore="input.css",
 )
 
+server = app.server
+
 # Place the navbar and the container for page content within the app.
 app.layout = html.Div(
     [

@@ -85,11 +85,10 @@
 1. Initialize a `package.json` file or use an existing one (complete one of the following):
 	- **Initialize a `package.json` file**
 		1. Initialize with `npm` to create `package.json` and `package-lock.json`.
-		1. Add `tailwind` dependencies to the `package.json` file.
+		1. Add `tailwind` dependencies and `tailwind` watch/build scripts to `package.json`.
 	- **Use an existing `package.json` file**
 		1. Copy the `package.json` file and its associated `package-lock.json` file into the `src` directory.
 1. Create a `tailwind.config.js` file in the `src` directory using the provided template.
-1. Add the `tailwind_compile.sh` script to the `src` directory.
 1. Install javascript/css dependencies found in the `package.json` file.
 1. Add `node_modules/` to `.gitignore`.
 
@@ -327,7 +326,7 @@
 		1. Create the following folder structure inside of the `src` directory.
 			- `assets`: images, css, and javascript files
 				- Create the sub-directories shown in the picture below.
-				- The `src` sub-directory will hold all of the input css in `input.css`. This will get compiled by the `tailwind_compile.sh` script into an `output.css` file created and stored in `dist`; these are the styles that get applied in the browser.
+				- The `src` sub-directory will hold all of the input css in `input.css`. This will get compiled by the `tailwind-watch` script command into an `output.css` file created and stored in `dist`; these are the styles that get applied in the browser.
 				- There is no need to ever open `output.css`, it is always generated from `input.css`.
 				- The `dist` sub-directory, and hence `output.css`, is ignored by git since you only need the `input.css` file to generate it.
 			- `components`: component parts of the interface that are not complete pages of the site.
@@ -349,9 +348,13 @@
 			```shell
 			npm init
 			```
-		1. Add `tailwind` dependencies to the `package.json` file.
+		1. Add `tailwind` dependencies and `tailwind` watch/build scripts to `package.json`.
 			```json
 			{
+				"scripts": {
+					"tailwind-watch": "npx tailwindcss -i ./assets/css/src/input.css -o ./assets/css/dist/output.css --watch",
+					"tailwind-build": "npx tailwindcss -i ./assets/css/src/input.css -o ./assets/css/dist/output.css --minify"
+				},
 				"devDependencies": {
 					"@tailwindcss/typography": "^0.5.8",
 					"tailwindcss": "^3.2.4"
@@ -381,7 +384,6 @@
 		```
 	- Be sure to adjust the `content` array if the directories are named differently or if there are more or less directories that make up the website than what is shown here.
 	- Feel free to use a `tailwind.config.js` file from a previous project in place of using this template.
-1. Add the `tailwind_compile.sh` script to the `src` directory.
 1. Install javascript/css dependencies found in the `package.json` file.
 	1. Navigate to the `src` directory.
 	1. Install the dependencies.

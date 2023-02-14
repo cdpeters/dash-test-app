@@ -72,11 +72,11 @@
 
 #### Running the App
 - Running the app requires two bash commands that will run two processes continuously to serve the app and serve its styles and update the app when changes are made.
-1. Run the `tailwind` compile script:
+1. Run the `tailwind-watch` script command:
 	1. Navigate to the project's `src` folder.
-	1. Run the compile script:
+	1. Run the script command:
 		```shell
-		./tailwind_compile.sh
+		npm run tailwind-watch
 		```
 1. In a separate terminal, run the app with a dev server:
 	1. Navigate to the project's `src` folder.
@@ -89,7 +89,9 @@
 - There are three main places where style information can be added to the app and its components:
 	1. `tailwind` utility classes within Dash components using the `className` parameter.
 	1. Extending/modifying `tailwind` styles using the `tailwind.config.js` file. See the `tailwind` documentation to learn more.
-	1. Adding CSS directly to the `input.css` file that gets compiled to an `output.css` file via the `tailwind_compile.sh` script. The `input.css` file is found at `src > assets > css > src`. See the `tailwind` documentation to learn how to add CSS styles to this file into the correct layers.
+	1. Adding CSS directly to the `input.css` file that gets compiled to an `output.css` file via the `tailwind-watch` script command found in the `package.json` scripts field. The `input.css` file is found at `src > assets > css > src`. See the `tailwind` documentation to learn how to add CSS styles to this file into the correct layers.
+- To update styles dynamically during runtime, create a `Dash` callback that has a `className` parameter of the html element of interest as its output and use the following function:
+	1. `update_utility_classes()` found in the `funcs.py` file in the `utils` folder.
 
 [Return to Topics Section](#topics)
 

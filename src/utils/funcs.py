@@ -5,15 +5,14 @@ Functions:
 """
 import logging
 import re
-from typing import Optional
 
 logger = logging.getLogger(__name__)
 
 
 def update_utility_classes(
     current_classes: str,
-    remove_classes: Optional[list[str]] = None,
-    add_classes: Optional[list[str]] = None,
+    remove_classes: list[str] | None = None,
+    add_classes: list[str] | None = None,
     ignore_prefix_warning: bool = False,
 ) -> str:
     """Update a utility class string by removing and/or adding classes.
@@ -36,9 +35,9 @@ def update_utility_classes(
     ----------
     current_classes : str
         Current utility class string.
-    remove_classes : Optional[list[str]], optional
+    remove_classes : list[str] | None, optional
         Classes to be removed, by default None.
-    add_classes : Optional[list[str]], optional
+    add_classes : list[str] | None, optional
         Classes to be added, by default None.
     ignore_prefix_warning : bool, optional
         Flag for suppressing the prefix warning, by default False.

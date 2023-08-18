@@ -36,6 +36,8 @@ Constants:
         ID_BACKGROUND_LINK
         ID_DASHBOARD_ICON
         ID_DASHBOARD_LINK
+        ID_QUARTO_ICON
+        ID_QUARTO_LINK
         ID_FIGURE_BAR
         ID_FIGURE_TEMP
         ID_FIGURE_PRECIP
@@ -60,18 +62,15 @@ with open(Path(__file__).parents[2] / "secrets.toml", "rb") as f:
 
 
 # Data Directories ---------------------------------------------------------------------
-
 GOOGLE_DRIVE_DIR = Path(secrets["google_drive"]["path"])
 DATA_DIR = Path(__file__).parents[2] / "data"
 
 
 # External Links -----------------------------------------------------------------------
-
 APP_SOURCE_CODE_URL = "https://github.com/cdpeters/dash-test-app"
 
 
 # Logos and Icons ----------------------------------------------------------------------
-
 BACKGROUND_ICON_DARK = "/assets/images/book_dark.svg"
 BACKGROUND_ICON_LIGHT = "/assets/images/book_light.svg"
 DASHBOARD_ICON_DARK = "/assets/images/chart-line_dark.svg"
@@ -93,11 +92,12 @@ HOVER_COLOR_DARK = "hover:bg-slate-700"
 
 
 # Component Ids ------------------------------------------------------------------------
-
 ID_BACKGROUND_ICON = "background-icon"
 ID_BACKGROUND_LINK = "background-link"
 ID_DASHBOARD_ICON = "dashboard-icon"
 ID_DASHBOARD_LINK = "dashboard-link"
+ID_QUARTO_ICON = "quarto-icon"
+ID_QUARTO_LINK = "quarto-link"
 ID_FIGURE_BAR = "figure-bar"
 ID_FIGURE_TEMP = "figure-temp"
 ID_FIGURE_PRECIP = "figure-precip"

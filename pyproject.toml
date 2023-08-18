@@ -13,6 +13,9 @@ sqlalchemy = "^1.4.44"
 tomli = "^2.0.1"
 ibis-framework = "^4.1.0"
 gunicorn = "^20.1.0"
+matplotlib = "^3.7.2"
+seaborn = "^0.12.2"
+scipy = {version = "^1.11.2", python = ">=3.10,<3.13"}
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.12.0"

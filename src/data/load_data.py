@@ -49,5 +49,9 @@ def load_sqlite_data(path: Path) -> dict[str, DataFrame]:
     return {name: db.table(name=name).execute() for name in tables_names}
 
 
-hawaii_weather_data = load_sqlite_data(path=GOOGLE_DRIVE_DIR / "hawaii.sqlite")
-playoff_teams = pd.read_csv(DATA_DIR / "playoff_teams_df.csv")
+if GOOGLE_DRIVE_DIR:
+    hawaii_weather_data = load_sqlite_data(path=GOOGLE_DRIVE_DIR / "hawaii.sqlite")
+else:
+    hawaii_weather_data = load_sqlite_data(path=DATA_DIR / "hawaii.sqlite")
+
+playoff_teams = pd.read_csv(filepath_or_buffer=DATA_DIR / "playoff_teams_df.csv")

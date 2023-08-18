@@ -57,12 +57,14 @@ import tomli
 # drive collaboration folder and to the project's data directory. `parents[2]` is the
 # 3rd parent (since index 2 is 3rd element) of the file path for this module: the
 # project's root directory `dash-test-app`.
-with open(Path(__file__).parents[2] / "secrets.toml", "rb") as f:
-    secrets = tomli.load(f)
+try:
+    with open(Path(__file__).parents[2] / "secrets.toml", "rb") as f:
+        secrets = tomli.load(f)
+    GOOGLE_DRIVE_DIR = Path(secrets["google_drive"]["path"])
+except FileNotFoundError:
+    GOOGLE_DRIVE_DIR = None
 
-
-# Data Directories ---------------------------------------------------------------------
-GOOGLE_DRIVE_DIR = Path(secrets["google_drive"]["path"])
+# Data Directory -----------------------------------------------------------------------
 DATA_DIR = Path(__file__).parents[2] / "data"
 
 

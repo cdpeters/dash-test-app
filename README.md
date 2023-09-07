@@ -1,4 +1,4 @@
-# dash-test-app
+# Dash Test App
 A testing ground for Dash app development including app features and experimenting with dashboard visualizations.
 
 ### Install Project Locally

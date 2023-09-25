@@ -2,17 +2,18 @@
 
 ### How to Use this Guide
 - This guide contains several workflow patterns for different aspects of a data projects.
-- It is assumed that the project was set up based on the instructions found in *[Data Project Creation/Installation Instructions](/data_project_installation_instructions.md)*:
-	- There is a dev tools CLI (command line interface) script `tools.sh` located in the project's root directory.
-	- The directory structure of the project is of the following form (note that some directories might be missing if they're not needed for the given project):
+- All steps that require a terminal are completed using BASH unless otherwise noted.
+- It is assumed that the project was set up based on the instructions found in *[Data Project Creation/Installation Instructions](data_project_installation_instructions.md)*:
+	- There is a dev tools CLI (command line interface) script `tools.py` located in the project's root directory.
+	- The directory structure of the project is of the following form (note that some directories might be missing if they're not needed for the given project)
 		<div align="center">
 			<img src="images/top_level_project_directory_tree_scaled.svg" />
 		</div>
-	- (Optionally) There is a directory called `src` that holds the files for a website that is set up with `tailwind` css.
+	- (Optionally) There is a directory called `src` that holds the files for a website that is set up with `tailwind` CSS.
 - The workflow patterns may be used multiple times depending on the project.
 - This guide is not meant to be read in its entirety, it is primarily a reference. To use, just skip around to the topics you need using the links found in the *Topics* section below.
 - **Activate the `conda` environment associated with the project**
-	- It is assumed that there is a Python environment associated with the project and that it is activated prior to using any of the workflow patterns in this guide unless otherwise specified.
+	> **It is assumed that there is a Python environment associated with the project and that it is activated prior to using any of the workflow patterns in this guide unless otherwise specified.**
 	- To activate:
 		```shell
 		conda activate <env_name>
@@ -20,53 +21,52 @@
 
 ### Topics
 - The following section links are listed in order of likely frequency of use:
-	- [Dev Tools](#dev-tools)
-	- [Dash App (Plotly Dash Website)](#dash-app-plotly-dash-website)
-	- [Git](#git)
-	- [Python Environment](#python-environment)
-	- [Jupyter Lab Settings](#jupyter-lab-settings)
-	- [Extras](#extras)
+	- *[Dev Tools](#dev-tools)*
+	- *[Dash App (Plotly Dash Website)](#dash-app-plotly-dash-website)*
+	- *[Git](#git)*
+	- *[Python Environment](#python-environment)*
+	- *[Jupyter Lab Settings](#jupyter-lab-settings)*
+	- *[Extras](#extras)*
 
-<hr>
+___
 
 ### Dev Tools
 #### Run Dev Tool Script
 - Current dev tools:
 	- `black` - code formatter
-	- `blacken-docs` - code formatter for markdown code blocks. Not run by default, see the `-md|--markdown` or `-mdo|--markdown-only` CLI options
+	- `blacken-docs` - code formatter for markdown code blocks in jupyter notebooks (`.ipynb`) and markdown files (.md). Runs on jupyter notebooks by default. Not run on markdown files by default, see the `-md|--markdown` cli option.
 	- `isort` - import formatter
 	- `interrogate` - docstring coverage
 	- `flake8` - linter
 	- `mypy` - type checker
-- By default, running `tools.sh` with no options will run these dev tools on jupyter notebooks only.
-- The script looks for files in the directory in which the script is ran and in the sub-directories of that directory recursively.
--	By design, the script is meant to be run from either the project's root directory or any of the top level directories within the root (the script can be run from further down the directory tree but expected behavior is not guaranteed).
+- By default, running `tools.py` with no options will run these dev tools on jupyter notebooks only, on the current working directory (note that some of the tools have the ability to recursively apply themselves down the directory tree).
+- By design, the script is meant to be run from either the project's root directory or any of the top level directories within the root (the script can be run from further down the directory tree but expected behavior is not guaranteed).
 - Additionally, CLI options can apply these tools to python and markdown files and also allow for the skipping of tools during run time.
-- To see all the CLI options made available by `tools.sh`, use the following command to access the help information:
+- To see all the CLI options made available by `tools.py`, use the following command to access the help information:
 	- From the project's root directory:
 		```shell
-		./tools.sh --help
+		python tools.py --help
 		```
 	- From the `src` or `notebooks` directory (or any other directory at that level):
 		```shell
-		../tools.sh --help
+		python ../tools.py --help
 		```
-- When using the `-md|--markdown` or `-mdo|--markdown-only` options, a file path(s) to a markdown file(s) must be provided.
-- When using the `-s|--skip` option, you must provide at least one tool name to skip as an argument.
-- When using the `-t|--type` option, you must provide either `all` or `py` as the argument. `all` will run the dev tools on all python type files (`*.ipynb` and `*.py` files). `py` will run the dev tools on python files only (`*.py` files).
+- When using the `-md|--markdown` option, filename(s) must be provided. The files must be either jupyter notebooks (`.ipynb`) or markdown files (.md) and must be within the current working directory that you are running the script from.
+- When using the `-s|--skip` option, you must provide a single string of one or more tool names separated by spaces and enclosed in quotes.
+- When using the `-t|--type` option, you must provide either `all` or `py` as the argument. `all` will run the dev tools on both jupyter notebooks and python files (`.ipynb` and `.py` files). `py` will run the dev tools on python files only (`.py` files).
 - Run the dev tools script (shown here with no CLI options):
 	- From the project's root directory:
 		```shell
-		./tools.sh
+		python tools.py
 		```
 	- From the `src` or `notebooks` directory (or any other directory at that level):
 		```shell
-		../tools.sh
+		python ../tools.py
 		```
 
-[Return to Topics Section](#topics)
+*[Return to Topics List](#topics)*
 
-<hr>
+___
 
 ### Dash App (Plotly Dash Website)
 
@@ -85,6 +85,26 @@
 		python app.py
 		```
 
+#### Adding Pages
+##### Steps Required for All Pages
+- To add a new page to the app there are a few steps that need to be completed:
+	1. Add the page and its metadata to the `page_metadata.xlsx`
+	2. In the project's root directory, run the `page_metadata.py` file as a module to create the updated `json` file containing all of the page metadata:
+	```shell
+	python -m data.page_metadata
+	```
+	3. In the `src > pages` directory, copy a page and rename it with the `module_name` value that was used in `page_metadata.xlsx` for this new page
+##### Additional Steps Based on Page Type
+###### Generic Pages
+ - A page that does not contain a markdown element.
+	1. Remove the markdown element (this element is essentially a part of the page template and is not needed for a generic page)
+	2. Add content for the generic page
+###### Markdown Pages
+- A page that contains a markdown element
+	1. Add the raw markdown file associated with this new page to the `src > pages_markdown` directory
+	2. Adjust any links to be sure they work within this project structure. Since the app is run from the `src` directory, all links should be relative to that directory, not to the `src > pages_markdown` or `src > pages` directories
+	3. Add any assets (such as images) that the markdown file uses to the appropriate folder in the `src > assets` directory
+
 #### Adding Styles
 - There are three main places where style information can be added to the app and its components:
 	1. `tailwind` utility classes within Dash components using the `className` parameter.
@@ -93,16 +113,16 @@
 - To update styles dynamically during runtime, create a `Dash` callback that has a `className` parameter of the html element of interest as its output and use the following function:
 	1. `update_utility_classes()` found in the `funcs.py` file in the `utils` folder.
 
-[Return to Topics Section](#topics)
+*[Return to Topics List](#topics)*
 
-<hr>
+___
 
 ### Git
 - git/GitHub workflows to be added in the future.
 
-[Return to Topics Section](#topics)
+*[Return to Topics List](#topics)*
 
-<hr>
+___
 
 ### Python Environment
 #### Adding/Removing Packages
@@ -153,9 +173,9 @@
 	- `--from-history` is important; this updates an environment file based directly on the dependencies when the `conda` environment was created and from any packages added using `conda` during the project (i.e. does not include sub-dependencies, only the top "level" of dependencies).
 	- `grep -v "^prefix: "` takes the output from export and only writes the lines that don't start with `"prefix: "` to `environment.yml`. The prefix is just the path to the virtual environment folder and likely includes our computer's username. We leave it out here so that it's not on GitHub and because `conda` doesn't need it when creating the virtual environment.
 
-[Return to Topics Section](#topics)
+*[Return to Topics List](#topics)*
 
-<hr>
+___
 
 ### Jupyter Lab Settings
 #### Install Jupyter Lab "Prettier" Contextual Help (done once per environment)
@@ -170,9 +190,9 @@
 	```
 - Access the contextual help by placing you cursor in a class/function/method or other object (click the text to place the cursor) and then use the keyboard shortcut `ctrl`+`I`.
 
-[Return to Topics Section](#topics)
+*[Return to Topics List](#topics)*
 
-<hr>
+___
 
 ### Extras
 
@@ -232,3 +252,5 @@ build-backend = "poetry.core.masonry.api"
 - `conda` can be slow.
 - Poetry's dependency resolver is more advanced than pip's.
 - Poetry, compared to other python environment/dependency managers, seems to have consistent activity on its GitHub and is actively being maintained.
+
+*[Return to Topics List](#topics)*

@@ -42,7 +42,7 @@ repos:
   hooks:
   - id: flake8
     args: [
-      "--extend-ignore=E203,D104",
+      "--extend-ignore=E203,D104,D301,E501",
       --max-line-length=88,
       --docstring-convention=numpy
     ]

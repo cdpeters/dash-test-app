@@ -8,8 +8,7 @@
 		- Can be used as a basic checklist to keep track of where you are in the process and ensure you're not skipping any of the steps along the way.
 	1. ***Detailed Steps***
 		- Contains more detail, explanation, and actual code snippets for completing the corresponding high level step for a given development role.
-- All steps that require a terminal are completed using git-bash unless otherwise noted.
-
+- All steps that require a terminal are completed using BASH unless otherwise noted (you might need to translate commands as appropriate based on your shell).
 
 ## Development Roles
 - There are two main development roles defined in this guide based on whether you are the creator of the project or just a collaborator on the project.
@@ -18,17 +17,16 @@
 		- [*High Level Steps - Both (Creator and Collaborator)*](#high-level-steps)
 		- [*Detailed Steps - Both (Creator and Collaborator)*](#detailed-steps)
 	1. ***Creator*** - sets up the project and works on it
-		- [*High Level Steps - Creator*](#section-high-level-steps)
-		- [*Detailed Steps - Creator*](#section-detailed-steps)
+		- [*High Level Steps - Creator*](#section-high-level-steps-development-role-creator)
+		- [*Detailed Steps - Creator*](#section-detailed-steps-development-role-creator)
 	1. ***Collaborator*** - only works on the project
-		- [*High Level Steps - Collaborator*](#section-high-level-steps-1)
-		- [*Detailed Steps - Collaborator*](#section-detailed-steps-1)
-
+		- [*High Level Steps - Collaborator*](#section-high-level-steps-development-role-collaborator)
+		- [*Detailed Steps - Collaborator*](#section-detailed-steps-development-role-collaborator)
 
 ## High Level Steps
 
 #### *Development Role: Both (Creator and Collaborator)*
-> For the detailed steps corresponding to this section: [*Detailed Steps - Both (Creator and Collaborator)*](#detailed-steps).
+> For the detailed steps corresponding to this section: [*Detailed Steps - Both (Creator and Collaborator)*](#detailed-steps)
 
 ### Done Once Overall (before creating or collaborating on any projects)
 1. Install Anaconda globally from [*www.anaconda.com*](https://www.anaconda.com/products/distribution).
@@ -38,16 +36,15 @@
 
 > **Global set up is complete. You're ready to create projects or collaborate on them!**
 
-<hr>
+___
 
-#### *Section: High Level Steps*
-#### *Development Role: Creator*
-> For the detailed steps corresponding to this section: [*Detailed Steps - Creator*](#section-detailed-steps).
+#### *Section: High Level Steps, Development Role: Creator*
+> For the detailed steps corresponding to this section: [*Detailed Steps - Creator*](#section-detailed-steps-development-role-creator)
 
 ### Done Once Per Project
 1. Set up GitHub repo and clone to your computer.
 1. If there is an active `conda` or other python environment, deactivate it.
-1. Create Python environment or use an existing one (complete one of the following):
+1. Create Python environment or use an existing one (complete **one** of the following):
 	- **Create environment from scratch**
 		> Your intention is not to use existing `environment.yml` and `pyproject.toml` files to create the environment.
 		1. Create `conda` environment **and activate it**.
@@ -69,20 +66,20 @@
 		1. Copy this environment's `environment.yml` and `pyproject.toml` files into the current project's root directory.
 		> **Result**: An existing Python environment with its dev tools **and** its project dependencies ready to use.
 1. Make the Python environment available as a kernel to Jupyter Lab if it hasn't been made available already.
-1. Add any separate dev tool config files and the dev tool CLI (command line interface) script `tools.sh` to the current project's root directory.
+1. Add any separate dev tool config files and the dev tool CLI (command line interface) script `tools.py` to the current project's root directory.
 1. Install `pre-commit` hooks.
 1. Create the project directory structure.
 1. Create a `secrets.toml` file.
 1. Add `secrets.toml` to `.gitignore`. **WARNING: Do not skip this step!**
 
 #### *Optional Steps: If the plan is to include a website in the project*
-1. Create the website directory structure in the `src` directory (complete one of the following):
+1. Create the website directory structure in the `src` directory (complete **one** of the following):
 	- **Create the directory structure from scratch**
 	- **Use the *Dash Test App* `src` directory in its entirety**
 		1. Download a zip file of the [*Dash Test App*](https://github.com/cdpeters/dash-test-app) project.
 		1. After extracting the contents, copy the entire `src` directory from this project into the current project's root directory.
 		1. Skip to the second to last step in this *Optional Steps* section (install dependencies).
-1. Initialize a `package.json` file or use an existing one (complete one of the following):
+1. Initialize a `package.json` file or use an existing one (complete **one** of the following):
 	- **Initialize a `package.json` file**
 		1. Initialize with `npm` to create `package.json` and `package-lock.json`.
 		1. Add `tailwind` dependencies and `tailwind` watch/build scripts to `package.json`.
@@ -94,11 +91,10 @@
 
 > **Project creation is complete. Project is ready to be worked on and shared with collaborators!**
 
-<hr>
+___
 
-#### *Section: High Level Steps*
-#### *Development Role: Collaborator*
-> For the detailed steps corresponding to this section: [*Detailed Steps - Collaborator*](#section-detailed-steps-1).
+#### *Section: High Level Steps, Development Role: Collaborator*
+> For the detailed steps corresponding to this section: [*Detailed Steps - Collaborator*](#section-detailed-steps-development-role-collaborator)
 
 ### Done Once Per Project
 1. Clone the GitHub repo to your computer.
@@ -114,13 +110,12 @@
 
 > **Existing project set up is complete. Project is ready to be worked on and shared with collaborators!**
 
-<hr>
-
+___
 
 ## Detailed Steps
 
 #### *Development Role: Both (Creator and Collaborator)*
-> For the high level steps corresponding to this section: [*High Level Steps - Both (Creator and Collaborator)*](#high-level-steps).
+> For the high level steps corresponding to this section: [*High Level Steps - Both (Creator and Collaborator)*](#high-level-steps)
 
 ### Done Once Overall (Before Creating or Collaborating on Any Projects)
 1. Install Anaconda globally from [*www.anaconda.com*](https://www.anaconda.com/products/distribution).
@@ -160,11 +155,10 @@
 
 > **Global set up is complete. You're ready to create projects or collaborate on them!**
 
-<hr>
+___
 
-#### *Section: Detailed Steps*
-#### *Development Role: Creator*
-> For the high level steps corresponding to this section: [*High Level Steps - Creator*](#section-high-level-steps).
+#### *Section: Detailed Steps, Development Role: Creator*
+> For the high level steps corresponding to this section: [*High Level Steps - Creator*](#section-high-level-steps-development-role-creator)
 
 ### Done Once Per Project
 1. Set up GitHub repo and clone to your computer.
@@ -183,7 +177,7 @@
 		```shell
 		conda deactivate
 		```
-1. Create Python environment or use an existing one (complete one of the following):
+1. Create Python environment or use an existing one (complete **one** of the following):
 	- **Create environment from scratch**
 		> Your intention is not to use existing `environment.yml` and `pyproject.toml` files to create the environment.
 
@@ -276,11 +270,11 @@
 		```shell
 		python -m ipykernel install --user --name <env_name>
 		```
-1. Add any separate dev tool config files and the dev tool CLI (command line interface) script `tools.sh` to the current project's root directory.
+1. Add any separate dev tool config files and the dev tool CLI (command line interface) script `tools.py` to the current project's root directory.
 	- The following config files and CLI script can be found in the [*Dash Test App*](https://github.com/cdpeters/dash-test-app):
 		- `.flake8` - flake8 config
 		- `.pre-commit-config.yaml` - pre-commit config
-		- `tools.sh` - CLI tool for running the dev tools
+		- `tools.py` - CLI tool for running the dev tools
 	- Add any additional config files as needed.
 1. Install `pre-commit` hooks.
 	```shell
@@ -321,7 +315,7 @@
 	- Ensure that this file **does not get committed** to the remote repo (i.e. the online GitHub repo).
 
 #### *Optional Steps: If the plan is to include a website in the project*
-1. Create the website directory structure in the `src` directory (complete one of the following):
+1. Create the website directory structure in the `src` directory (complete **one** of the following):
 	- **Create the directory structure from scratch**
 		1. Create the following folder structure inside of the `src` directory.
 			- `assets`: images, css, and javascript files
@@ -342,7 +336,7 @@
 			1. Click the green *<> Code* dropdown button and select the *Download Zip* option.
 		1. After extracting the contents, copy the entire `src` directory from this project into the current project's root directory.
 		1. Skip to the second to last step in this *Optional Steps* section (install dependencies).
-1. Initialize a `package.json` file or use an existing one (complete one of the following):
+1. Initialize a `package.json` file or use an existing one (complete **one** of the following):
 	- **Initialize a `package.json` file**
 		1. Initialize with `npm` to create `package.json` and `package-lock.json`.
 			```shell
@@ -394,11 +388,10 @@
 
 > **Project creation is complete. Project is ready to be worked on and shared with collaborators!**
 
-<hr>
+___
 
-#### *Section: Detailed Steps*
-#### *Development Role: Collaborator*
-> For the high level steps corresponding to this section: [*High Level Steps - Collaborator*](#section-high-level-steps-1).
+#### *Section: Detailed Steps, Development Role: Collaborator*
+> For the high level steps corresponding to this section: [*High Level Steps - Collaborator*](#section-high-level-steps-development-role-collaborator)
 
 ### Done Once Per Project
 1. Clone the GitHub repo to your computer.
@@ -479,4 +472,4 @@
 
 > **Existing project set up is complete. Project is ready to be worked on and shared with collaborators!**
 
-<hr>
+___

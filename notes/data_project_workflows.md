@@ -173,6 +173,21 @@ ___
 	- `--from-history` is important; this updates an environment file based directly on the dependencies when the `conda` environment was created and from any packages added using `conda` during the project (i.e. does not include sub-dependencies, only the top "level" of dependencies).
 	- `grep -v "^prefix: "` takes the output from export and only writes the lines that don't start with `"prefix: "` to `environment.yml`. The prefix is just the path to the virtual environment folder and likely includes our computer's username. We leave it out here so that it's not on GitHub and because `conda` doesn't need it when creating the virtual environment.
 
+#### Removing an environment
+1. To remove a `conda` environment, use the following command:
+	```shell
+	conda remove --name <env_name> --all
+	```
+	- confirm that the environment was removed by checking that it is not in the current list of environments:
+		```shell
+		conda info --envs
+		```
+1. Delete the environment's folder on your computer which is usually found in the `~/anaconda3/envs/` directory.
+1. Remove the environment's kernel from the jupyter environment:
+	```shell
+	jupyter kernelspec remove <env_name>
+	```
+
 *[Return to Topics List](#topics)*
 
 ___
